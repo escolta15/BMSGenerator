@@ -1,0 +1,8 @@
+<ng-container *ngIf="box && box.name">
+  <h1>{{ box.name }}</h1>
+  <div class="box">
+    <button class="button" (click)="turnOff()">Turn Off</button>
+    <h2>State: {{ value }}</h2>
+    <button class="button" (click)="turnOn()">Turn On</button>
+  </div>
+</ng-container>

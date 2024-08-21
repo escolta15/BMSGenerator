@@ -1,0 +1,82 @@
+<div class="touch_panel" [ngClass]="{ lcd: lcd, magnet: magnet }">
+  <mat-tab-group>
+    <mat-tab *ngFor="let page of getPages(); let i = index">
+      <ng-template mat-tab-label> Page {{ i + 1 }} </ng-template>
+      <app-page [page]="page"></app-page>
+    </mat-tab>
+  </mat-tab-group>
+
+  <router-outlet></router-outlet>
+
+  <div class="features">
+    <div class="features--left">
+      <div class="time">
+        {{ time }}
+      </div>
+      <div *ngIf="programming" class="programming">
+        <button (click)="reset()">Reset</button>
+        <mat-icon *ngIf="programmingLed" title="available">sync</mat-icon>
+      </div>
+    </div>
+    <div class="features--right">
+      <div class="thermostats">Thermostats: {{ thermostats }}</div>
+      <div class="inputs">Inputs: {{ inputs }}</div>
+      <div class="ports">
+        Ports:
+        <ng-container *ngFor="let port of ports">{{ port }},</ng-container>
+      </div>
+      <div *ngIf="licenses && licenses.length" class="licenses">
+        Licenses:
+        <ng-container *ngFor="let license of licenses"
+          >{{ license }},</ng-container
+        >
+      </div>
+      <div class="sound">
+        <ng-container *ngFor="let sound of sound">
+          <ng-container [ngSwitch]="sound">
+            <mat-icon
+              *ngSwitchCase="SOUNDS.MICROPHONE"
+              title="{{ sound }} available"
+              >mic</mat-icon
+            >
+            <mat-icon
+              *ngSwitchCase="SOUNDS.SPEAKERS"
+              title="{{ sound }} available"
+              >volume_up</mat-icon
+            >
+          </ng-container>
+        </ng-container>
+      </div>
+      <div class="sensors">
+        <ng-container *ngFor="let sensor of sensors">
+          <ng-container [ngSwitch]="sensor">
+            <mat-icon
+              *ngSwitchCase="SENSORS_TYPES.TEMPERATURE"
+              title="{{ sensor }} sensor"
+              >thermostat</mat-icon
+            >
+            <mat-icon
+              *ngSwitchCase="SENSORS_TYPES.HUMIDITY"
+              title="{{ sensor }} sensor"
+              >water_drop</mat-icon
+            >
+            <mat-icon
+              *ngSwitchCase="SENSORS_TYPES.LIGHT"
+              title="{{ sensor }} sensor"
+              >lightbulb</mat-icon
+            >
+            <mat-icon
+              *ngSwitchCase="SENSORS_TYPES.PROXIMITY"
+              title="{{ sensor }} sensor"
+              >radar</mat-icon
+            >
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if defined?(@touch_screen.iluminated_button) %>
+<button (click)="turnOn()">Button to iluminate screen</button>
+<%end%>

@@ -1,0 +1,34 @@
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { Box } from '../../models/box.model';
+import { Status } from '../../models/status.enum';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-box',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './box.component.html',
+  styleUrls: ['./box.component.scss'],
+})
+export class BoxComponent implements OnInit {
+  public box: Box | null = null;
+  value: Status = Status.OFF;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.route.params.subscribe(() => {
+      this.box = history.state;
+      this.value = Status.OFF;
+    });
+  }
+
+  public turnOn(): void {
+    this.value = Status.ON;
+  }
+
+  public turnOff(): void {
+    this.value = Status.OFF;
+  }
+}

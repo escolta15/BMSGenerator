@@ -1,0 +1,116 @@
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatIconModule } from '@angular/material/icon';
+import { Box } from '../models/box.model';
+import { License } from '../models/license.enum';
+import { Sensor } from '../models/sensor.enum';
+import { Sound } from '../models/sound.enum';
+import { PageComponent } from './page/page.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [
+    RouterOutlet,
+    CommonModule,
+    MatTabsModule,
+    MatIconModule,
+    PageComponent,
+  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
+})
+export class AppComponent {
+
+  readonly SENSORS_TYPES = Sensor;
+  readonly SOUNDS = Sound;
+
+  public title: string = '<%= @project_name %>';
+  public lcd: boolean = <%= @touch_screen.lcd %>;
+  public totalBox: number = 6;
+  public totalPage: number = <%= @touch_screen.pages %>;
+  public pages: { [id: number]: any } = {};
+  public boxes: Box[] = [];
+  public sensors: any[] = <%= @touch_screen.sensors %>;
+  public thermostats: number = <%= @touch_screen.thermostats %>;
+  <% if @touch_screen.inputs.nil? %>
+  public inputs: number = 0;
+  <% else %>
+  public inputs: number = <%= @touch_screen.inputs %>;
+  <% end %>
+  <% if @touch_screen.inputs.nil? %>
+  public sound: any[] = <%= @touch_screen.sound %>;
+  <% else %>
+  public sound: any[] = [];
+  <% end %>
+  public time: string = '';
+  public programming: boolean = <%= @touch_screen.programming %>;
+  public programmingLed: boolean = false;
+  public ports: any[] = <%= @touch_screen.ports %>;
+  <% if defined?(@touch_screen.get_licenses) %>
+  public licenses: any[] = <%= @touch_screen.get_licenses %>;
+  <% else %>
+  public licenses: any[] = [];
+  <% end %>
+  <% if defined?(@touch_screen.magnet) %>
+  public magnet: boolean = <%= @touch_screen.magnet %>;
+  <% else %>
+  public magnet: boolean = false;
+  <% end %>
+  
+  private functions: string[] = ['Lights', 'Shutters', 'Air'];
+  private clock: boolean = <%= @touch_screen.clock %>;
+
+  constructor(private router: Router) {
+    this.initializePages();
+    this.initializeBoxes();
+    this.addBoxes();
+    this.setTime();
+  }
+
+  public getPages(): Box[] {
+    return Object.values(this.pages);
+  }
+
+  public reset(): void {
+    this.programmingLed = true;
+    setTimeout(() => (this.programmingLed = false), 3000);
+    this.router.navigate(['']);
+  }
+
+  <% if defined?(@touch_screen.iluminated_button) %>
+  public turnOn(): void {
+    console.log('Do something');
+  }
+  
+  <%end%>
+  private initializePages(): void {
+    for (let currentPage = 0; currentPage < this.totalPage; currentPage++) {
+      this.pages[currentPage] = [];
+    }
+  }
+
+  private initializeBoxes(): void {
+    for (let index = 0; index < this.functions.length; index++) {
+      this.boxes.push({ id: index + 1, name: this.functions[index] });
+    }
+  }
+
+  private addBoxes(): void {
+    this.boxes.forEach((box: Box, index: number) => {
+      const indexPage = Math.trunc(index / this.totalBox);
+      this.pages[indexPage].push(box);
+    });
+  }
+
+  private setTime(): void {
+    if (this.clock) {
+      setInterval(() => {
+        this.time = new Date().toLocaleTimeString();
+      }, 1000);
+    }
+  }
+
+}

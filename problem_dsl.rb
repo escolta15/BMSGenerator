@@ -2,6 +2,17 @@ require 'erb'
 require 'json'
 require 'tty-prompt'
 require 'fileutils'
+require_relative 'angular_project_dsl.rb'
+require_relative 'touch_screen_dsl.rb'
+require_relative 'touch_screen_z100_dsl.rb'
+require_relative 'touch_screen_z70_dsl.rb'
+require_relative 'touch_screen_z50_dsl.rb'
+require_relative 'touch_screen_z41_com_dsl.rb'
+require_relative 'touch_screen_z41_pro_dsl.rb'
+require_relative 'touch_screen_z41_lite_dsl.rb'
+require_relative 'touch_screen_z40_dsl.rb'
+require_relative 'touch_screen_z35_dsl.rb'
+require_relative 'touch_screen_z28_dsl.rb'
 
 prompt = TTY::Prompt.new
 
@@ -17,38 +28,6 @@ def empty_json_file(file_path)
   empty_json = {}.to_json
   File.open(file_path, 'w') do |file|
     file.write(empty_json)
-  end
-end
-
-def add_remote_entry(app_name, port)
-  file_path = 'projects/home/src/assets/federation.manifest.json'
-  file_content = File.read(file_path)
-  data = JSON.parse(file_content)
-  data[app_name] = "http://localhost:#{port}/remoteEntry.json"
-  File.open(file_path, 'w') do |file|
-    file.write(JSON.pretty_generate(data))
-  end
-end
-
-def add_route(app_name)
-  file_path = 'projects/home/src/app/app.routes.ts'
-  content = File.read(file_path)
-  regex = /(\[\s*)([^\]]*)(\s*\])/
-  new_line = "" 
-  new_content = content.gsub(regex) do |match|
-    opening_bracket = $1
-    array_content = $2.strip
-    closing_bracket = $3
-    new_content = "{\n\tpath: '#{app_name}',\n\tloadComponent: () => loadRemoteModule('#{app_name}', './Component').then((m) => m.AppComponent) }"
-    if array_content.empty?
-      new_line = "import { loadRemoteModule } from '@angular-architects/native-federation';\n"
-      "#{opening_bracket}#{new_content}#{closing_bracket}"
-    else  
-      "#{opening_bracket}#{array_content}, #{new_content}#{closing_bracket}"
-    end
-  end
-  File.open(file_path, 'w') do |file|
-    file.write(new_line + new_content)
   end
 end
 
@@ -102,37 +81,39 @@ else
 end
 Dir.chdir(workspace_name)
 add_script_in_package_json
-
-options = ["Z40", "Z41"]
-selection = prompt.select("Select an option please:", options)
-puts "#{selection}"
-
-name = ""
-
-while name == ""
-  puts "Please, insert a name for the #{selection}:"
-  name = gets.chomp
-end
-project_name = to_lower_kebab_case(name)
-puts "The name is #{project_name}"
-if !Dir.exist?("projects/#{project_name}")
-  system("npm i @angular-architects/native-federation@17 -D")
-  system("npm i npm i concurrently -D")
+system("npm i @angular-architects/native-federation@17 -D")
+system("npm i npm i concurrently -D")
+if !Dir.exist?("projects/home")
   system("ng generate application home --ssr=false --routing --style=scss --skip-install=true")
   system("ng g @angular-architects/native-federation:init --project home --port 4200 --type dynamic-host")
   empty_json_file('projects/home/src/assets/federation.manifest.json')
   add_start_command('home')
-  system("ng generate application #{project_name} --ssr=false --routing --style=scss --skip-install=true")
-  system("ng g @angular-architects/native-federation:init --project #{project_name} --port 4201 --type remote")
-  add_remote_entry(project_name, 4201)
-  add_route(project_name)
-  add_start_command(project_name)
-  system("ng generate application #{project_name}1 --ssr=false --routing --style=scss --skip-install=true")
-  system("ng g @angular-architects/native-federation:init --project #{project_name}1 --port 4202 --type remote")
-  add_remote_entry(project_name + '1', 4202)
-  add_route(project_name + '1')
-  add_start_command(project_name + '1')
-else
-  puts("The workspace #{project_name} exists. It will not be created again.")
 end
 
+#options = ["Z40", "Z41"]
+#selection = prompt.select("Select an option please:", options)
+#puts "#{selection}"
+
+#name = ""
+
+#while name == ""
+#  puts "Please, insert a name for the #{selection}:"
+#  name = gets.chomp
+#end
+#project_name = to_lower_kebab_case(name)
+#puts "The name is #{project_name}"
+
+z100 = TouchScreenZ100.new
+z100.name = 'z100'
+z100.set_color('silver')
+z100.set_license('Smartphone Control')
+
+touch_screens = [z100]
+
+for touch_screen in touch_screens
+  project = AngularProjectDSL.new(touch_screen)
+  project.package('@angular/material', '17.3.10')
+  project.component("Page")
+  project.component("Box")
+  project.generate
+end

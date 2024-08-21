@@ -1,0 +1,40 @@
+.touch_panel {
+  background-color: <%= @touch_screen.get_color %>;
+  width: <%= @touch_screen.width %>;
+  height: <%= @touch_screen.height %>;
+
+  &.lcd {
+    filter: brightness(1.25);
+  }
+
+  &.magnet {
+    border-style: solid;
+    border-width: 10px;
+  }
+
+  ::ng-deep .mat-tab-label {
+    height: 32px !important;
+  }
+
+  .features {
+    position: relative;
+
+    .features--left {
+      float: left;
+
+      .programming {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        button {
+          cursor: pointer;
+        }
+      }
+    }
+
+    .features--right {
+      float: right;
+    }
+  }
+}
