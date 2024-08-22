@@ -8,7 +8,8 @@ class AngularProjectDSLRemote < AngularProjectDSL
     @workspace_name = workspace_name
     @type = "remote"
     @touch_screen = touch_screen
-    @port = 4201
+    @id = calculateId
+    @port = 4200 + @id 
   end
 
   # Generador
@@ -22,7 +23,13 @@ class AngularProjectDSLRemote < AngularProjectDSL
       system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
       system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
       add_remote_entry(@project_name, @port)
-      add_route(@project_name)
+      file_path = 'projects/home/src/app/app.routes.ts'
+      new_content = "\n\t{\n\tpath: '#{@project_name}',\n\tloadComponent: () => loadRemoteModule('#{@project_name}', './Component').then((m) => m.AppComponent) }"
+      new_line = ""
+      if (@id === 1)
+        new_line = "import { loadRemoteModule } from '@angular-architects/native-federation';\n"
+      end
+      add_route(file_path, new_content, new_line)
       add_start_command(@project_name)
     else
       puts("The project #{@project_name} exists. It will not be created again.")
@@ -54,6 +61,15 @@ class AngularProjectDSLRemote < AngularProjectDSL
       @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
       read_templates(@models, 'src/models/', binding)
     end
+  end
+
+  private
+
+  def calculateId
+    file_path = 'projects/home/src/assets/federation.manifest.json'
+    file_content = File.read(file_path)
+    data = JSON.parse(file_content)
+    return data.size + 1
   end
 
 end

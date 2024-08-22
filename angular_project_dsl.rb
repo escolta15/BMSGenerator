@@ -30,25 +30,22 @@ class AngularProjectDSL
     end
   end
 
-  def add_route(app_name)
-    file_path = 'projects/home/src/app/app.routes.ts'
-    content = File.read(file_path)
+  def add_route(routes_path, new_content, new_line = "")
+    puts Dir.pwd
+    content = File.read(routes_path)
     regex = /(\[\s*)([^\]]*)(\s*\])/
-    new_line = "" 
-    new_content = content.gsub(regex) do |match|
+    final_content = content.gsub(regex) do |match|
       opening_bracket = $1
       array_content = $2.strip
       closing_bracket = $3
-      new_content = "{\n\tpath: '#{app_name}',\n\tloadComponent: () => loadRemoteModule('#{app_name}', './Component').then((m) => m.AppComponent) }"
       if array_content.empty?
-        new_line = "import { loadRemoteModule } from '@angular-architects/native-federation';\n"
         "#{opening_bracket}#{new_content}#{closing_bracket}"
       else  
-        "#{opening_bracket}#{array_content}, #{new_content}#{closing_bracket}"
+        "#{opening_bracket}#{new_content}, #{array_content}#{closing_bracket}"
       end
     end
-    File.open(file_path, 'w') do |file|
-      file.write(new_line + new_content)
+    File.open(routes_path, 'w') do |file|
+      file.write(new_line + final_content)
     end
   end
 

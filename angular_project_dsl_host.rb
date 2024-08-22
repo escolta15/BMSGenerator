@@ -34,13 +34,21 @@ class AngularProjectDSLHost < AngularProjectDSL
       files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
       read_templates(files, 'src/app/', binding)
 
-      # Genera los componentes
       @components.each do |component|
         component_name = to_lower_kebab_case(component[:name])
         component_dir = "src/app/#{component_name}"
         if !Dir.exist?(component_dir)
-          # Genera el componente si no existe
           system("ng generate component src/app/#{component[:name]}")
+          file_path = "src/app/app.routes.ts"
+          if (component_name === "not-found")
+            new_content = "{\n\tpath: '**',\n\tcomponent: NotFoundComponent}"
+            new_line = "import { NotFoundComponent } from './not-found/not-found.component';\n"
+            add_route(file_path, new_content, new_line)
+          elsif component_name === "home"
+            new_content = "{\n\tpath: '',\n\tcomponent: HomeComponent,\n\tpathMatch: 'full'}"
+            new_line = "import { HomeComponent } from './home/home.component';\n"
+            add_route(file_path, new_content, new_line)
+          end
         else
           puts("The component #{component_name} exists. It will not be generated again.")
         end

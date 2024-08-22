@@ -61,7 +61,8 @@ project.generate
 #puts "The name is #{project_name}"
 
 project = AngularProjectDSLHost.new('home', workspace_name)
-#project.component("NotFound")
+project.component("NotFound")
+project.component("Home")
 project.generate
 
 z100 = TouchScreenZ100.new
@@ -69,7 +70,11 @@ z100.name = 'z100'
 z100.set_color('silver')
 z100.set_license('Smartphone Control')
 
-touch_screens = [z100]
+z50 = TouchScreenZ50.new
+z50.name = 'z50'
+z50.set_color('matte white')
+
+touch_screens = [z100, z50]
 
 for touch_screen in touch_screens
   project = AngularProjectDSLRemote.new(touch_screen.name, workspace_name, touch_screen)
