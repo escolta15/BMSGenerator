@@ -1,17 +1,19 @@
 class AngularProjectDSL
 
-  def initialize(app_name, port, type, touch_screen = nil)
+  def initialize(app_name)
     @project_name = app_name
-    @port = port
-    @type = type
     @packages = []
-    @touch_screen = touch_screen
     @components = []
     @models = []
+    @type = ""
   end
 
-  def package(name, version)
-    @packages << { name: name, version: version }
+  def package(name, version, isDev)
+    params = ""
+    if isDev
+      params = "-D"
+    end
+    @packages << { name: name, version: version, params: params }
   end
 
   def component(name)
@@ -79,54 +81,7 @@ class AngularProjectDSL
 
   # Generador
   def generate
-    # Verifica si el directorio del proyecto ya existe
-    if !Dir.exist?("projects/#{@project_name}")
-      # Crea la estructura del proyecto Angular si no existe
-      system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
-      system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
-      if (@type == 'remote')
-        add_remote_entry(@project_name, @port)
-        add_route(@project_name)
-      else
-        empty_json_file('projects/home/src/assets/federation.manifest.json')
-      end
-      add_start_command(@project_name)
-    else
-        puts("The project #{@project_name} exists. It will not be created again.")
-    end
-    # Ingresa en el directorio del proyecto
-    Dir.chdir("projects/#{@project_name}") do
-      install_packages()
-      add_icons()
-      
-      puts @type
-      # Personaliza el contenido del componente app utilizando plantillas ERB
-      files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
-      read_templates(files, 'src/app/', binding)
-
-      # Genera los componentes
-      @components.each do |component|
-        component_name = component[:name]
-
-        # Verifica si el directorio del componente ya existe
-        component_dir = "src/app/#{component_name}"
-        if !Dir.exist?(component_dir)
-          # Genera el componente si no existe
-          system("ng generate component src/app/#{component[:name]}")
-        else
-          puts("The component #{component_name} exists. It will not be generated again.")
-        end
-        
-        # Modifica el archivo del componente
-        files = Dir.glob(File.join("../../../templates/#{component_name}/", '*'))
-        read_templates(files, "src/app/#{component_name}/", binding)
-      end
-
-      # Genera los modelos
-      create_folder('models')
-      @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
-      read_templates(@models, 'src/models/', binding)
-    end
+    raise NotImplementedError
   end
 
   private
@@ -135,7 +90,7 @@ class AngularProjectDSL
   def install_packages()
     @packages.each do |package|
       # Ejecuta el comando npm install para instalar el paquete
-      system("npm install #{package[:name]}@#{package[:version]}")
+      system("npm install #{package[:name]}@#{package[:version]} #{package[:params]}")
     end
   end
 
@@ -179,6 +134,14 @@ class AngularProjectDSL
     filename = parts.find { |part| part.end_with?(".erb") }
     filename = filename.sub(/\.erb$/, '')
     return filename
+  end
+
+  def to_lower_kebab_case(text)
+    text
+      .strip
+      .gsub(/\s+/, '-')
+      .gsub(/([a-z])([A-Z])/, '\1-\2')
+      .downcase
   end
 
 end
