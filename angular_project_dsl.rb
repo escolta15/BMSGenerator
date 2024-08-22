@@ -1,7 +1,9 @@
 class AngularProjectDSL
 
-  def initialize(touch_screen)
-    @project_name = touch_screen.name
+  def initialize(app_name, port, type, touch_screen = nil)
+    @project_name = app_name
+    @port = port
+    @type = type
     @packages = []
     @touch_screen = touch_screen
     @components = []
@@ -68,15 +70,26 @@ class AngularProjectDSL
     end
   end
 
+  def empty_json_file(file_path)
+    empty_json = {}.to_json
+    File.open(file_path, 'w') do |file|
+      file.write(empty_json)
+    end
+  end
+
   # Generador
   def generate
     # Verifica si el directorio del proyecto ya existe
     if !Dir.exist?("projects/#{@project_name}")
       # Crea la estructura del proyecto Angular si no existe
       system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
-      system("ng g @angular-architects/native-federation:init --project #{@project_name} --port 4201 --type remote")
-      add_remote_entry(@project_name, 4201)
-      add_route(@project_name)
+      system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
+      if (@type == 'remote')
+        add_remote_entry(@project_name, @port)
+        add_route(@project_name)
+      else
+        empty_json_file('projects/home/src/assets/federation.manifest.json')
+      end
       add_start_command(@project_name)
     else
         puts("The project #{@project_name} exists. It will not be created again.")
@@ -86,8 +99,9 @@ class AngularProjectDSL
       install_packages()
       add_icons()
       
+      puts @type
       # Personaliza el contenido del componente app utilizando plantillas ERB
-      files = Dir.glob(File.join('../../../templates/app/', '*'))
+      files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
       read_templates(files, 'src/app/', binding)
 
       # Genera los componentes
@@ -110,7 +124,7 @@ class AngularProjectDSL
 
       # Genera los modelos
       create_folder('models')
-      @models = Dir.glob(File.join('../../../templates/models/', '*'))
+      @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
       read_templates(@models, 'src/models/', binding)
     end
   end

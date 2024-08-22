@@ -1,0 +1,5 @@
+ <ul>
+     <li *ngFor="let remote of ROUTES"><a [routerLink]="remote.path">{{remote.path}}</a></li>
+ </ul>
+
+ <router-outlet></router-outlet>

@@ -1,0 +1,16 @@
+import { Component } from '@angular/core';
+import { RouterOutlet, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { routes } from './app.routes';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterModule, CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.scss'
+})
+export class AppComponent {
+  title = 'home';
+  readonly ROUTES = routes;
+}

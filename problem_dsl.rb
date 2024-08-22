@@ -24,13 +24,6 @@ def to_lower_kebab_case(text)
     .downcase
 end
 
-def empty_json_file(file_path)
-  empty_json = {}.to_json
-  File.open(file_path, 'w') do |file|
-    file.write(empty_json)
-  end
-end
-
 def add_start_command(app_name)
   file_path = 'start_apps.js'
   content = File.read(file_path)
@@ -83,12 +76,6 @@ Dir.chdir(workspace_name)
 add_script_in_package_json
 system("npm i @angular-architects/native-federation@17 -D")
 system("npm i npm i concurrently -D")
-if !Dir.exist?("projects/home")
-  system("ng generate application home --ssr=false --routing --style=scss --skip-install=true")
-  system("ng g @angular-architects/native-federation:init --project home --port 4200 --type dynamic-host")
-  empty_json_file('projects/home/src/assets/federation.manifest.json')
-  add_start_command('home')
-end
 
 #options = ["Z40", "Z41"]
 #selection = prompt.select("Select an option please:", options)
@@ -110,8 +97,12 @@ z100.set_license('Smartphone Control')
 
 touch_screens = [z100]
 
+#el puerto hacerlo con el indice
+project = AngularProjectDSL.new('home', 4200, 'dynamic-host')
+project.generate
+
 for touch_screen in touch_screens
-  project = AngularProjectDSL.new(touch_screen)
+  project = AngularProjectDSL.new(touch_screen.name, 4201, 'remote', touch_screen)
   project.package('@angular/material', '17.3.10')
   project.component("Page")
   project.component("Box")
