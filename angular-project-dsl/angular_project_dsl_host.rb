@@ -41,11 +41,11 @@ class AngularProjectDSLHost < AngularProjectDSL
           system("ng generate component src/app/#{component[:name]}")
           file_path = "src/app/app.routes.ts"
           if (component_name === "not-found")
-            new_content = "{\n\tpath: '**',\n\tcomponent: NotFoundComponent}"
+            new_content = "{\n\t\tpath: '**',\n\t\tcomponent: NotFoundComponent}"
             new_line = "import { NotFoundComponent } from './not-found/not-found.component';\n"
             add_route(file_path, new_content, new_line)
           elsif component_name === "home"
-            new_content = "{\n\tpath: '',\n\tcomponent: HomeComponent,\n\tpathMatch: 'full'}"
+            new_content = "{\n\t\tpath: '',\n\t\tcomponent: HomeComponent,\n\t\tpathMatch: 'full'}"
             new_line = "import { HomeComponent } from './home/home.component';\n"
             add_route(file_path, new_content, new_line)
           end

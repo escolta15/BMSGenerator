@@ -18,6 +18,14 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {}
 
   public onClick(box: any): void {
-    this.router.navigate(['/box', { id: box.id }], { state: box });
+    if (this.router.config[0] && this.router.config[0].path == '') {
+      this.router.navigate(['internal/box', { id: box.id }], {
+        state: box,
+      });
+    } else {
+      this.router.navigate(['<%= @project_name %>/touchscreen/box', { id: box.id }], {
+        state: box,
+      });
+    }
   }
 }

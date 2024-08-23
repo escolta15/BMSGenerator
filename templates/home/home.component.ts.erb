@@ -15,9 +15,11 @@ export class HomeComponent implements OnInit {
 
   constructor(private router: Router) {}
 
-  this.touchScreens = routes.filter(
+  ngOnInit(): void {
+    this.touchScreens = routes.filter(
       (route: Route) => route.path !== '' && route.path !== '**'
-  );
+    );
+  }
 
   public onClick(route: Route): void {
     this.router.navigate([route.path]);

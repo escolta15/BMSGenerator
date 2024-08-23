@@ -5,6 +5,7 @@ class AngularProjectDSL
     @packages = []
     @components = []
     @models = []
+    @guards = []
     @type = ""
   end
 
@@ -39,9 +40,9 @@ class AngularProjectDSL
       array_content = $2.strip
       closing_bracket = $3
       if array_content.empty?
-        "#{opening_bracket}#{new_content}#{closing_bracket}"
+        "#{opening_bracket}\n\t#{new_content}#{closing_bracket}"
       else  
-        "#{opening_bracket}#{new_content}, #{array_content}#{closing_bracket}"
+        "#{opening_bracket}#{new_content},\n\t#{array_content}#{closing_bracket}"
       end
     end
     File.open(routes_path, 'w') do |file|
