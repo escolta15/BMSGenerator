@@ -1,1 +1,5 @@
-<h1>Welcome!</h1>
+<div class="touch-screen-grid">
+  <button *ngFor="let remote of touchScreens" (click)="onClick(remote)">
+    {{ remote.path }}
+  </button>
+</div>

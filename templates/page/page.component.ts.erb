@@ -18,6 +18,6 @@ export class PageComponent implements OnInit {
   ngOnInit(): void {}
 
   public onClick(box: any): void {
-    this.router.navigate(['/box', box.id], { state: box });
+    this.router.navigate(['/box', { id: box.id }], { state: box });
   }
 }
