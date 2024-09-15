@@ -47,19 +47,6 @@ project.package('concurrently', '8.2.2', true)
 project.package('@angular/material', '17.3.10', false)
 project.generate
 
-#options = ["Z40", "Z41"]
-#selection = prompt.select("Select an option please:", options)
-#puts "#{selection}"
-
-#name = ""
-
-#while name == ""
-#  puts "Please, insert a name for the #{selection}:"
-#  name = gets.chomp
-#end
-#project_name = to_lower_kebab_case(name)
-#puts "The name is #{project_name}"
-
 project = AngularProjectDSLHost.new('home', workspace_name)
 project.component("NotFound")
 project.component("Home")
