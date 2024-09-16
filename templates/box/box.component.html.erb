@@ -1,8 +1,31 @@
 <ng-container *ngIf="box && box.name">
   <h1>{{ box.name }}</h1>
-  <div class="box">
-    <button class="button" (click)="turnOff()">Turn Off</button>
-    <h2>State: {{ value }}</h2>
-    <button class="button" (click)="turnOn()">Turn On</button>
+  <div [ngSwitch]="box.type" class="box">
+    <ng-container *ngSwitchCase="boxTypes.BOOLEAN">
+      <ng-container *ngTemplateOutlet="templateBoolean"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="boxTypes.NUMBER">
+      <ng-container *ngTemplateOutlet="templateNumber"></ng-container>
+    </ng-container>
+    <ng-container *ngSwitchCase="boxTypes.STRING">
+      <ng-container *ngTemplateOutlet="templateString"></ng-container>
+    </ng-container>
   </div>
 </ng-container>
+
+<ng-template #templateBoolean>
+  <button class="button" (click)="turnOff()">Turn Off</button>
+  <h2>State: {{ box?.value }}</h2>
+  <button class="button" (click)="turnOn()">Turn On</button>
+</ng-template>
+
+<ng-template #templateNumber>
+  <button class="button" (click)="calculate(false)">Decrease</button>
+  <h2>{{ box?.value }}</h2>
+  <button class="button" (click)="calculate(true)">Increase</button>
+</ng-template>
+
+<ng-template #templateString>
+  <input [(ngModel)]="box!.value" placeholder="Introduce your value" />
+  <h2>State: {{ box?.value }}</h2>
+</ng-template>

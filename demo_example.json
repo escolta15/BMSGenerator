@@ -5,13 +5,33 @@
       "type": "z100",
       "name": "Living room",
       "color": "silver",
-      "licenses": ["Smartphone Control"]
+      "licenses": ["Smartphone Control"],
+      "boxes": [
+        {
+          "name": "Main ligth",
+          "type": "boolean"
+        },
+        {
+          "name": "Counter",
+          "type": "number"
+        },
+        {
+          "name": "Welcome",
+          "type": "string"
+        }
+      ]
     },
     {
       "type": "z70",
       "name": "Kitchen",
       "color": "anthracite black",
-      "licenses": ["ZenVoice"]
+      "licenses": ["ZenVoice"],
+      "boxes": [
+        {
+          "name": "Blinds",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z50",

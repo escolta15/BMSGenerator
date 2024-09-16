@@ -3,6 +3,7 @@ require_relative 'touch_screen_dsl.rb'
 class TouchScreenZ50 < TouchScreen
     def initialize
         super
+        @name = "z50"
         @size = "5\""
         @width = "480px"
         @height = "854px"

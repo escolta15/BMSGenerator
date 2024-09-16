@@ -1,7 +1,7 @@
 class AngularProjectDSL
 
-  def initialize(app_name)
-    @project_name = app_name
+  def initialize(name)
+    @project_name = name
     @packages = []
     @components = []
     @models = []
@@ -9,7 +9,11 @@ class AngularProjectDSL
     @type = ""
   end
 
-  def package(name, version, isDev)
+  def generate
+    raise NotImplementedError
+  end
+
+  def add_package(name, version, isDev)
     params = ""
     if isDev
       params = "-D"
@@ -17,8 +21,20 @@ class AngularProjectDSL
     @packages << { name: name, version: version, params: params }
   end
 
-  def component(name)
+  def add_component(name)
     @components << { name: name }
+  end
+
+  private
+
+  def install_packages
+    @packages.each do |package|
+      system("npm install #{package[:name]}@#{package[:version]} #{package[:params]}")
+    end
+  end
+
+  def add_icons
+    read_templates(['../../../templates/index.html.erb'], 'src/', binding)
   end
 
   def add_remote_entry(app_name, port)
@@ -70,68 +86,40 @@ class AngularProjectDSL
     end
   end
 
-  def empty_json_file(file_path)
-    empty_json = {}.to_json
-    File.open(file_path, 'w') do |file|
-      file.write(empty_json)
-    end
-  end
-
-  # Generador
-  def generate
-    raise NotImplementedError
-  end
-
-  private
-
-  # Metodo para instalar los paquetes npm
-  def install_packages()
-    @packages.each do |package|
-      # Ejecuta el comando npm install para instalar el paquete
-      system("npm install #{package[:name]}@#{package[:version]} #{package[:params]}")
-    end
-  end
-
-  # Metodo para agregar los iconos al archivo de estilos
-  def add_icons
-    read_templates(['../../../templates/index.html.erb'], 'src/', binding)
-  end
-
-  # Metodo para crear una carpeta
   def create_folder(name)
     folder = "src/#{name}"
     if !Dir.exist?(folder)
-      # Si no existe, crea la carpeta
       Dir.mkdir(folder)
     end
   end
 
-  # Metodo para leer las plantillas
   def read_templates(files, path, data_binding)
     for file in files
       filename = find_file(file)
       file_path = "#{path}#{filename}"
 
-      # Leer la plantilla ERB desde el archivo
       erb_template = File.read("#{file}")
 
-      # Crear una instancia de la clase ERV
       erb = ERB.new(erb_template)
 
-      # Realizar el enlace de datos utilizando el contexto de binding proporcionado
       result = erb.result(data_binding)
 
-      # Escribe el contenido modificado de vuelta al archivo
       File.open(file_path, "w") { |file| file.write(result) }
     end
   end
 
-  # Metodo para coger el nombre del archivo
   def find_file(file)
     parts = file.split('/')
     filename = parts.find { |part| part.end_with?(".erb") }
     filename = filename.sub(/\.erb$/, '')
     return filename
+  end
+
+  def empty_json_file(file_path)
+    empty_json = {}.to_json
+    File.open(file_path, 'w') do |file|
+      file.write(empty_json)
+    end
   end
 
   def to_lower_kebab_case(text)

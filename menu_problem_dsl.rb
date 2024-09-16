@@ -42,14 +42,14 @@ workspace_name = "BMS-" + name.gsub(" ", "_")
 puts "The name is #{workspace_name}"
 
 project = AngularProjectDSLParent.new(workspace_name)
-project.package('@angular-architects/native-federation', '17.1.8', true)
-project.package('concurrently', '8.2.2', true)
-project.package('@angular/material', '17.3.10', false)
+project.add_package('@angular-architects/native-federation', '17.1.8', true)
+project.add_package('concurrently', '8.2.2', true)
+project.add_package('@angular/material', '17.3.10', false)
 project.generate
 
 project = AngularProjectDSLHost.new('home', workspace_name)
-project.component("NotFound")
-project.component("Home")
+project.add_component("NotFound")
+project.add_component("Home")
 project.generate
 
 z100 = TouchScreenZ100.new
@@ -65,7 +65,7 @@ touch_screens = [z100, z50]
 
 for touch_screen in touch_screens
   project = AngularProjectDSLRemote.new(touch_screen.name, workspace_name, touch_screen)
-  project.component("Page")
-  project.component("Box")
+  project.add_component("Page")
+  project.add_component("Box")
   project.generate
 end

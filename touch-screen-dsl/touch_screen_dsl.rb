@@ -6,6 +6,15 @@ class TouchScreen
     @clock = true
     @programming = true
     @ports = ['KNX']
+    @boxes = []
+  end
+
+  def add_box(name, type)
+    @boxes << { name: name, type: type }
+  end
+
+  def get_boxes
+    @boxes
   end
 
   def set_color(color)

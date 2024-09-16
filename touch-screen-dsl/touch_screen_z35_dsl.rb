@@ -5,6 +5,7 @@ class TouchScreenZ35 < TouchScreen
 
   def initialize
       super
+      @name = "z35"
       @size = "3.5\""
       @width = "320px"
       @height = "240px"

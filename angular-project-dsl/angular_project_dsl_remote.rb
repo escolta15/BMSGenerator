@@ -8,18 +8,15 @@ class AngularProjectDSLRemote < AngularProjectDSL
     @workspace_name = workspace_name
     @type = "remote"
     @touch_screen = touch_screen
-    @id = calculateId
+    @id = calculate_id
     @port = 4200 + @id 
   end
 
-  # Generador
   def generate
     if !Dir.pwd.match?(@workspace_name)
       Dir.chdir(@workspace_name)
     end
-    # Verifica si el directorio del proyecto ya existe
     if !Dir.exist?("projects/#{@project_name}")
-      # Crea la estructura del proyecto Angular si no existe
       system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
       system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
       add_remote_entry(@project_name, @port)
@@ -35,16 +32,13 @@ class AngularProjectDSLRemote < AngularProjectDSL
     else
       puts("The project #{@project_name} exists. It will not be created again.")
     end
-    # Ingresa en el directorio del proyecto
     Dir.chdir("projects/#{@project_name}") do
       install_packages()
       add_icons()
       
-      # Personaliza el contenido del componente app utilizando plantillas ERB
       files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
       read_templates(files, 'src/app/', binding)
 
-      # Genera los componentes
       @components.each do |component|
         component_name = to_lower_kebab_case(component[:name])
         component_dir = "src/app/#{component_name}"
@@ -57,12 +51,10 @@ class AngularProjectDSLRemote < AngularProjectDSL
         read_templates(files, "src/app/#{component_name}/", binding)
       end
 
-      # Genera los modelos
       create_folder('models')
       @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
       read_templates(@models, 'src/models/', binding)
 
-      # Genera los guards
       create_folder('guards')
       @guards = Dir.glob(File.join("../../../templates/#{@type}/guards/", '*'))
       read_templates(@guards, 'src/guards/', binding)
@@ -71,7 +63,7 @@ class AngularProjectDSLRemote < AngularProjectDSL
 
   private
 
-  def calculateId
+  def calculate_id
     file_path = 'projects/home/src/assets/federation.manifest.json'
     file_content = File.read(file_path)
     data = JSON.parse(file_content)

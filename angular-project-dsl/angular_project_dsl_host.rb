@@ -10,14 +10,11 @@ class AngularProjectDSLHost < AngularProjectDSL
     @port = 4200
   end
 
-  # Generador
   def generate
     if !Dir.pwd.match?(@workspace_name)
       Dir.chdir(@workspace_name)
     end
-    # Verifica si el directorio del proyecto ya existe
     if !Dir.exist?("projects/#{@project_name}")
-      # Crea la estructura del proyecto Angular si no existe
       system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
       system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
       empty_json_file('projects/home/src/assets/federation.manifest.json')
@@ -25,12 +22,10 @@ class AngularProjectDSLHost < AngularProjectDSL
     else
       puts("The project #{@project_name} exists. It will not be created again.")
     end
-    # Ingresa en el directorio del proyecto
     Dir.chdir("projects/#{@project_name}") do
       install_packages()
       add_icons()
       
-      # Personaliza el contenido del componente app utilizando plantillas ERB
       files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
       read_templates(files, 'src/app/', binding)
 

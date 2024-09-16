@@ -1,34 +1,59 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 import { Box } from '../../models/box.model';
 import { Status } from '../../models/status.enum';
-import { CommonModule } from '@angular/common';
+import { BoxType } from '../../models/box-type.enum';
 
 @Component({
   selector: 'app-box',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './box.component.html',
   styleUrls: ['./box.component.scss'],
 })
 export class BoxComponent implements OnInit {
+  readonly boxTypes = BoxType;
   public box: Box | null = null;
-  value: Status = Status.OFF;
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.route.params.subscribe(() => {
       this.box = history.state;
-      this.value = Status.OFF;
+      this.addValue();
     });
   }
 
   public turnOn(): void {
-    this.value = Status.ON;
+    if (this.box) this.box.value = Status.ON;
   }
 
   public turnOff(): void {
-    this.value = Status.OFF;
+    if (this.box) this.box.value = Status.OFF;
+  }
+
+  public calculate(increase: boolean) {
+    if (this.box)
+      this.box.value = increase
+        ? ++(this.box.value as number)
+        : --(this.box.value as number);
+  }
+
+  private addValue(): void {
+    switch (this.box?.type) {
+      case BoxType.BOOLEAN:
+        this.box.value = Status.OFF;
+        break;
+      case BoxType.NUMBER:
+        this.box.value = 0;
+        break;
+      case BoxType.STRING:
+        this.box.value = '';
+        break;
+      default:
+        break;
+    }
   }
 }

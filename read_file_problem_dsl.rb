@@ -69,10 +69,16 @@ def read_touchscreens(workspace_name, touchscreens)
           current_touchscreen.set_license(license)
         end
       end
+      if touchscreen['boxes'] && !touchscreen['boxes'].empty?
+        puts "tengo boxes en #{touchscreen['name']}"
+        touchscreen['boxes'].each do |box|
+          current_touchscreen.add_box(box['name'], box['type'])
+        end
+      end
 
       current_project = AngularProjectDSLRemote.new(current_touchscreen.name, workspace_name, current_touchscreen)
-      current_project.component("Page")
-      current_project.component("Box")
+      current_project.add_component("Page")
+      current_project.add_component("Box")
       current_project.generate
     end
   end
@@ -83,14 +89,14 @@ if parsed_data['projectName'] && !parsed_data['projectName'].empty?
   puts "The name is #{workspace_name}"
 
   project = AngularProjectDSLParent.new(workspace_name)
-  project.package('@angular-architects/native-federation', '17.1.8', true)
-  project.package('concurrently', '8.2.2', true)
-  project.package('@angular/material', '17.3.10', false)
+  project.add_package('@angular-architects/native-federation', '17.1.8', true)
+  project.add_package('concurrently', '8.2.2', true)
+  project.add_package('@angular/material', '17.3.10', false)
   project.generate
 
   project = AngularProjectDSLHost.new('home', workspace_name)
-  project.component("NotFound")
-  project.component("Home")
+  project.add_component("NotFound")
+  project.add_component("Home")
   project.generate
   
   if parsed_data['touchscreens'] && !parsed_data['touchscreens'].empty?
