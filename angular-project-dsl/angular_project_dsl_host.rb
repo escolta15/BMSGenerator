@@ -15,10 +15,8 @@ class AngularProjectDSLHost < AngularProjectDSL
       Dir.chdir(@workspace_name)
     end
     if !Dir.exist?("projects/#{@project_name}")
-      system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
-      system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
-      empty_json_file('projects/home/src/assets/federation.manifest.json')
-      add_start_command(@project_name)
+      create_project
+      configurate_project
     else
       puts("The project #{@project_name} exists. It will not be created again.")
     end
@@ -51,6 +49,11 @@ class AngularProjectDSLHost < AngularProjectDSL
         read_templates(files, "src/app/#{component_name}/", binding)
       end
     end
+  end
+
+  def configurate_project
+    empty_json_file('projects/home/src/assets/federation.manifest.json')
+    add_start_command(@project_name)
   end
 
 end

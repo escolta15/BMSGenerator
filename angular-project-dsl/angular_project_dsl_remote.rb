@@ -17,18 +17,8 @@ class AngularProjectDSLRemote < AngularProjectDSL
       Dir.chdir(@workspace_name)
     end
     if !Dir.exist?("projects/#{@project_name}")
-      system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
-      system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
-      add_remote_entry(@project_name, @port)
-      file_path = 'projects/home/src/app/app.routes.ts'
-      new_content = "{\n\t\tpath: '#{@project_name}',\n\t\tloadChildren: () => loadRemoteModule('#{@project_name}', './routes').then((m) => m.routes) }"
-      new_line = ""
-      if (@id === 1)
-        new_line = "import { loadRemoteModule } from '@angular-architects/native-federation';\n"
-      end
-      add_route(file_path, new_content, new_line)
-      modify_exposition(@project_name)
-      add_start_command(@project_name)
+      create_project
+      configurate_project
     else
       puts("The project #{@project_name} exists. It will not be created again.")
     end
@@ -76,6 +66,19 @@ class AngularProjectDSLRemote < AngularProjectDSL
     modified_content = file_content.gsub('./Component', './routes')
     final_content = modified_content.gsub('component.ts', 'routes.ts')
     File.open(file_path, 'w') { |file| file.write(final_content) }
+  end
+
+  def configurate_project
+    add_remote_entry(@project_name, @port)
+    file_path = 'projects/home/src/app/app.routes.ts'
+    new_content = "{\n\t\tpath: '#{@project_name}',\n\t\tloadChildren: () => loadRemoteModule('#{@project_name}', './routes').then((m) => m.routes) }"
+    new_line = ""
+    if (@id === 1)
+      new_line = "import { loadRemoteModule } from '@angular-architects/native-federation';\n"
+    end
+    add_route(file_path, new_content, new_line)
+    modify_exposition(@project_name)
+    add_start_command(@project_name)
   end
 
 end

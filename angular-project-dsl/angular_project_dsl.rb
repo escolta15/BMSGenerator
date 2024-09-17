@@ -129,4 +129,13 @@ class AngularProjectDSL
       .downcase
   end
 
+  def create_project
+    system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
+    system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
+  end
+
+  def configurate_project
+    raise NotImplementedError
+  end
+
 end
