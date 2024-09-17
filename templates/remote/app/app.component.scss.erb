@@ -2,6 +2,9 @@
   background-color: <%= @touch_screen.get_color %>;
   width: <%= @touch_screen.width %>;
   height: <%= @touch_screen.height %>;
+  <% if @touch_screen.get_color == "#2A2A2C" %>
+    color: white;
+  <% end %>
 
   &.lcd {
     filter: brightness(1.25);
@@ -36,5 +39,15 @@
     .features--right {
       float: right;
     }
+  }
+
+  .power {
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    bottom: 0;
+    right: 0;
+    width: 100%;
   }
 }

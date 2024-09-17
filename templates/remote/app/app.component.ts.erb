@@ -62,6 +62,16 @@ export class AppComponent {
   <% else %>
   public magnet: boolean = false;
   <% end %>
+  <% if defined?(@touch_screen.battery) %>
+  public battery: boolean = <%= @touch_screen.battery %>;
+  <% else %>
+  public battery: boolean = false;
+  <% end %>
+  <% if defined?(@touch_screen.external_power_supply) %>
+  public externalPowerSupply: boolean = <%= @touch_screen.external_power_supply %>;
+  <% else %>
+  public externalPowerSupply: boolean = false;
+  <% end %>
 
   private clock: boolean = <%= @touch_screen.clock %>;
 

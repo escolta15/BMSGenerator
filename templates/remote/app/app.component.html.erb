@@ -75,6 +75,12 @@
       </div>
     </div>
   </div>
+  <div class="power">
+    <mat-icon *ngIf="battery" title="Battery">battery_full</mat-icon>
+    <mat-icon *ngIf="externalPowerSupply" title="External Power Supply"
+      >power</mat-icon
+    >
+  </div>
 </div>
 
 <% if defined?(@touch_screen.iluminated_button) %>

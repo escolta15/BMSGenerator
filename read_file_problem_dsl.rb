@@ -70,7 +70,6 @@ def read_touchscreens(workspace_name, touchscreens)
         end
       end
       if touchscreen['boxes'] && !touchscreen['boxes'].empty?
-        puts "tengo boxes en #{touchscreen['name']}"
         touchscreen['boxes'].each do |box|
           current_touchscreen.add_box(box['name'], box['type'])
         end

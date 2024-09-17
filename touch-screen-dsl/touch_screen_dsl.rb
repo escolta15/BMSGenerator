@@ -1,5 +1,5 @@
 class TouchScreen
-  attr_accessor :name, :width, :height, :lcd, :pages, :sensors, :thermostats, :inputs, :sound, :clock, :programming, :ports
+  attr_accessor :name, :width, :height, :lcd, :pages, :sensors, :thermostats, :inputs, :sound, :clock, :programming, :ports, :external_power_supply
 
   def initialize
     @external_power_supply = true

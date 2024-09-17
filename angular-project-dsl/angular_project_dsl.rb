@@ -48,7 +48,6 @@ class AngularProjectDSL
   end
 
   def add_route(routes_path, new_content, new_line = "")
-    puts Dir.pwd
     content = File.read(routes_path)
     regex = /(\[\s*)([^\]]*)(\s*\])/
     final_content = content.gsub(regex) do |match|
