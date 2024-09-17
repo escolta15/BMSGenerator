@@ -13,9 +13,9 @@ class AngularProjectDSL
     raise NotImplementedError
   end
 
-  def add_package(name, version, isDev)
+  def add_package(name, version, is_dev)
     params = ""
-    if isDev
+    if is_dev
       params = "-D"
     end
     @packages << { name: name, version: version, params: params }
