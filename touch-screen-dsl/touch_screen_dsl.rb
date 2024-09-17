@@ -19,13 +19,13 @@ class TouchScreen
 
   def set_color(color)
     if (color == 'silver')
-        @color = "#a1a1a0"
+      @color = "#a1a1a0"
     elsif (color == 'anthracite black')
-        @color = "#2A2A2C"
+      @color = "#2A2A2C"
     elsif (color == 'matte white')
-        @color = "#F0EFE9"
-    elsif (color == 'glossy white')
-        @color = "#ECECE8"
+      @color = "#F0EFE9"
+    else
+      @color = ""
     end
   end
 

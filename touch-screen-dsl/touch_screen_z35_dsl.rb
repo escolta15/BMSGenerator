@@ -16,14 +16,4 @@ class TouchScreenZ35 < TouchScreen
       @inputs = 4
       @iluminated_button = true
   end
-
-  def set_color(color)
-    if (color == 'silver')
-        @color = "#a1a1a0"
-    elsif (color == 'anthracite black')
-        @color = "#2A2A2C"
-    elsif (color == 'matte white')
-        @color = "#F0EFE9"
-    end
-  end
 end

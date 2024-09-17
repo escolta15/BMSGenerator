@@ -75,10 +75,14 @@ def read_touchscreens(workspace_name, touchscreens)
         end
       end
 
-      current_project = AngularProjectDSLRemote.new(current_touchscreen.name, workspace_name, current_touchscreen)
-      current_project.add_component("Page")
-      current_project.add_component("Box")
-      current_project.generate
+      if (current_touchscreen.get_color == "")
+        puts "The touchscreen (#{touchscreen['name']}) cannot be created. Review the data, please."
+      else
+        current_project = AngularProjectDSLRemote.new(current_touchscreen.name, workspace_name, current_touchscreen)
+        current_project.add_component("Page")
+        current_project.add_component("Box")
+        current_project.generate
+      end
     end
   end
 end

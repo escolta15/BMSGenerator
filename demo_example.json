@@ -36,37 +36,354 @@
     {
       "type": "z50",
       "name": "Room 1",
-      "color": "matte white"
+      "color": "matte white",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z41Com",
       "name": "Room 2",
-      "color": "glossy white"
+      "color": "glossy white",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z41Pro",
       "name": "Bathroom 1",
-      "color": "silver"
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z41Lite",
       "name": "Bathroom 2",
-      "color": "silver"
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z40",
       "name": "Room 3",
-      "color": "silver"
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z35",
       "name": "Room 4",
-      "color": "silver"
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     },
     {
       "type": "z28",
       "name": "Room 5",
-      "color": "silver"
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
+    },
+    {
+      "type": "z28",
+      "name": "Room 5",
+      "color": "silver",
+      "boxes": [
+        {
+          "name": "Ligths",
+          "type": "boolean"
+        }
+      ]
     }
   ]
 }

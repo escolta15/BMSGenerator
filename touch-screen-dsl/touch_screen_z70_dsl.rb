@@ -17,6 +17,13 @@ class TouchScreenZ70 < TouchScreen
         @licenses = []
     end
 
+    def set_color(color)
+      super(color)
+      if (color == 'glossy white')
+        @color = "#ECECE8"
+      end
+    end
+
     def set_license(name)
       @licenses << name
     end

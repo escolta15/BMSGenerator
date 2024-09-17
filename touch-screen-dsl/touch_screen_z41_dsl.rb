@@ -15,4 +15,11 @@ class TouchScreenZ41 < TouchScreen
         @ports << 'Micro-USB'
         @magnet = true
     end
+
+    def set_color(color)
+        super(color)
+        if (color == 'glossy white')
+            @color = "#ECECE8"
+        end
+    end
 end

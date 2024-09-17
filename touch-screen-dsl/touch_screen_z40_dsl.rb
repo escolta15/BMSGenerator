@@ -16,4 +16,12 @@ class TouchScreenZ40 < TouchScreen
       @inputs = 4
       @iluminated_button = true
   end
+
+  def set_color(color)
+    super(color)
+    if (color == 'glossy white')
+      @color = "#ECECE8"
+    end
+  end
+      
 end

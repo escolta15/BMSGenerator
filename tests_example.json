@@ -1,0 +1,25 @@
+{
+  "projectName": "DemoBuilding",
+  "touchscreens": [
+    {
+      "type": "z100",
+      "name": "Living room",
+      "color": "red",
+      "licenses": ["Smartphone Control"],
+      "boxes": [
+        {
+          "name": "Main ligth",
+          "type": "boolean"
+        },
+        {
+          "name": "Counter",
+          "type": "number"
+        },
+        {
+          "name": "Welcome",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}
