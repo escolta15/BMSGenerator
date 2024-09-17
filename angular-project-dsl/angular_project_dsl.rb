@@ -153,7 +153,7 @@ class AngularProjectDSL
     raise NotImplementedError
   end
 
-  def generate_component(component, name)
+  def generate_component
     raise NotImplementedError
   end
 
