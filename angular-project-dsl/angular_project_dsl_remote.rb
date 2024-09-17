@@ -13,38 +13,10 @@ class AngularProjectDSLRemote < AngularProjectDSL
   end
 
   def generate
-    check_location
-    create_project("projects/#{@project_name}")
-    Dir.chdir("projects/#{@project_name}") do
-      install_packages()
-      add_icons()
-      
-      files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
-      read_templates(files, 'src/app/', binding)
-
-      @components.each do |component|
-        component_name = to_lower_kebab_case(component[:name])
-        component_dir = "src/app/#{component_name}"
-        if !Dir.exist?(component_dir)
-          system("ng generate component src/app/#{component[:name]}")
-        else
-          puts("The component #{component_name} exists. It will not be generated again.")
-        end
-        files = Dir.glob(File.join("../../../templates/#{component_name}/", '*'))
-        read_templates(files, "src/app/#{component_name}/", binding)
-      end
-
-      create_folder('models')
-      @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
-      read_templates(@models, 'src/models/', binding)
-
-      create_folder('guards')
-      @guards = Dir.glob(File.join("../../../templates/#{@type}/guards/", '*'))
-      read_templates(@guards, 'src/guards/', binding)
-    end
+    create_native_project
   end
 
-  private
+  private 
 
   def calculate_id
     file_path = 'projects/home/src/assets/federation.manifest.json'
@@ -72,6 +44,20 @@ class AngularProjectDSLRemote < AngularProjectDSL
     add_route(file_path, new_content, new_line)
     modify_exposition(@project_name)
     add_start_command(@project_name)
+  end
+
+  def generate_component(component, name)
+    system("ng generate component src/app/#{component[:name]}")
+  end
+
+  def create_structure
+    create_folder('models')
+    @models = Dir.glob(File.join("../../../templates/#{@type}/models/", '*'))
+    read_templates(@models, 'src/models/', binding)
+
+    create_folder('guards')
+    @guards = Dir.glob(File.join("../../../templates/#{@type}/guards/", '*'))
+    read_templates(@guards, 'src/guards/', binding)
   end
 
 end

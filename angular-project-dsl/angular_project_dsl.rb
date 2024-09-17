@@ -153,4 +153,40 @@ class AngularProjectDSL
     raise NotImplementedError
   end
 
+  def generate_component(component, name)
+    raise NotImplementedError
+  end
+
+  def create_structure
+    raise NotImplementedError
+  end
+
+  def create_native_project
+    check_location
+    create_project("projects/#{@project_name}")
+    Dir.chdir("projects/#{@project_name}") do
+      install_packages()
+      add_icons()
+
+      files = Dir.glob(File.join("../../../templates/#{@type}/app/", '*'))
+      read_templates(files, 'src/app/', binding)
+
+      @components.each do |component|
+        component_name = to_lower_kebab_case(component[:name])
+        component_dir = "src/app/#{component_name}"
+        if !Dir.exist?(component_dir)
+          generate_component(component, component_name)
+        else
+          puts("The component #{component_name} exists. It will not be generated again.")
+        end
+        files = Dir.glob(File.join("../../../templates/#{component_name}/", '*'))
+        read_templates(files, "src/app/#{component_name}/", binding)
+      end
+
+      if (@type == "remote")
+        create_structure
+      end
+    end
+  end
+
 end
