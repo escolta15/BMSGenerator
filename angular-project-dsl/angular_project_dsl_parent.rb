@@ -8,11 +8,7 @@ class AngularProjectDSLParent < AngularProjectDSL
   end
 
   def generate
-    if !Dir.exist?(@project_name)
-      system("ng new #{@project_name} --create-application=false")
-    else
-      puts("The project #{@project_name} exists. It will not be created again.")
-    end
+    create_project(@project_name)
     Dir.chdir(@project_name) do
       install_packages()
       
@@ -33,6 +29,10 @@ class AngularProjectDSLParent < AngularProjectDSL
     File.open(file_path, 'w') do |file|
       file.write(JSON.pretty_generate(data))
     end
+  end
+
+  def generate_project
+    system("ng new #{@project_name} --create-application=false")
   end
 
 end

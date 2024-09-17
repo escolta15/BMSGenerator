@@ -129,9 +129,24 @@ class AngularProjectDSL
       .downcase
   end
 
-  def create_project
+  def check_location
+    if !Dir.pwd.match?(@workspace_name)
+      Dir.chdir(@workspace_name)
+    end
+  end
+
+  def create_project(path)
+    if !Dir.exist?(path)
+      generate_project
+    else
+      puts("The project #{@project_name} exists. It will not be created again.")
+    end
+  end
+
+  def generate_project
     system("ng generate application #{@project_name} --ssr=false --routing --style=scss --skip-install=true")
     system("ng g @angular-architects/native-federation:init --project #{@project_name} --port #{@port} --type #{@type}")
+    configurate_project
   end
 
   def configurate_project

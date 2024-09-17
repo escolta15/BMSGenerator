@@ -13,15 +13,8 @@ class AngularProjectDSLRemote < AngularProjectDSL
   end
 
   def generate
-    if !Dir.pwd.match?(@workspace_name)
-      Dir.chdir(@workspace_name)
-    end
-    if !Dir.exist?("projects/#{@project_name}")
-      create_project
-      configurate_project
-    else
-      puts("The project #{@project_name} exists. It will not be created again.")
-    end
+    check_location
+    create_project("projects/#{@project_name}")
     Dir.chdir("projects/#{@project_name}") do
       install_packages()
       add_icons()
