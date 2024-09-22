@@ -11,8 +11,9 @@ When the generator is executed, a project is created that contains a *Host* appl
 1. [Installation](#installation)
 2. [Dependencies](#dependencies)
 3. [Use](#use)
-4. [Authors](#authors)
-5. [References](#references)
+4. [License](#license)
+5. [Authors](#authors)
+6. [References](#references)
 
 ## Installation
 
@@ -32,9 +33,7 @@ The generator was built with the following dependencies:
 
 ## Use
 
-There are two ways to launch the generator:
-
-1. Reading a JSON File.
+There is at the moment only one way to launch the generator: reading a JSON File.
 
 There is a file called 'demo_example.json' where you can configure the structure that the BMS will have. The content of the file must include the following:
 
@@ -49,10 +48,15 @@ There is a file called 'demo_example.json' where you can configure the structure
     - type: it can be boolean, number or string.
 
 The file to launch is 'read_file_problem_dsl.rb' by running the command:
-
-- ruby read_file_problem_dsl.rb
+```bash
+ruby read_file_problem_dsl.rb
+```
 
 You can change the name of the configuration file inside.
+
+## Licence
+
+This work is licensed under the license **Creative Commons Attribution 4.0 International**.
 
 ## Authors
 
