@@ -1,24 +1,25 @@
-#BMSGenerator
+# BMSGenerator
 
-This repository contains the generator for the master's thesis 'Optimization in the Automatic Generation of a Building Management System through a Line of Touchscreens'.
+This repository contains the generator for the master's thesis **'Optimization in the Automatic Generation of a Building Management System through a Line of Touchscreens'**.
 
-The generator helps manage variability and scalability through DSLs for Angular projects and touchscreens.
+The generator helps manage **variability** and **scalability** through DSLs for Angular projects and touchscreens.
 
-When the generator is executed, a project is created that contains a Host application and Remote applications, which are the touchscreens. This architecture is called Native Federation.
+When the generator is executed, a project is created that contains a *Host* application and *Remote* applications, which are the touchscreens. This architecture is called **Native Federation**.
 
 ## Table of Contents
 
-1. [Installation]
-2. [Dependencies]
-3. [Use]
-4. [Authors]
-5. [References]
+1. [Installation](#installation)
+2. [Dependencies](#dependencies)
+3. [Use](#use)
+4. [Authors](#authors)
+5. [References](#references)
 
 ## Installation
 
 Instructions for installing the project on your local machine.
-
-- git clone https://github.com/escolta15/BMSGenerator.git
+```bash
+git clone https://github.com/escolta15/BMSGenerator.git
+```
 
 ## Dependencies
 
