@@ -1,20 +1,17 @@
 require_relative 'touch_screen_dsl.rb'
 
-class TouchScreenZ70 < TouchScreen
+class TouchScreenZEV < TouchScreen
     def initialize
         super
-        @name = "z70"
-        @size = "7\""
-        @width = "1280px"
-        @height = "800px"
+        @name = "zev"
+        @size = "5.5\""
+        @width = "480px"
+        @height = "854px"
         @lcd = true
-        @pages = 12
-        @sensors = ['Proximity', 'Light', 'Temperature']
+        @pages = 7
+        @sensors = ['Proximity']
         @thermostats = 2
-        @inputs = 4
-        @sound = ['Microphone', 'Speakers']
-        @ports << 'Ethernet'
-        @ports << 'Micro-USB'
+        @inputs = 2
         @licenses = []
     end
 
@@ -22,6 +19,8 @@ class TouchScreenZ70 < TouchScreen
       super(color)
       if (color == 'glossy white')
         @color = "#ECECE8"
+      elsif (color == 'blue light')
+        @color = "#ADD8E6"
       end
     end
 

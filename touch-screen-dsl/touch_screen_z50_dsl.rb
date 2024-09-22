@@ -13,7 +13,8 @@ class TouchScreenZ50 < TouchScreen
         @thermostats = 2
         @inputs = 2
         @sound = ['Microphone', 'Speakers']
-        @ports << ['Ethernet', 'Micro-USB']
+        @ports << 'Ethernet'
+        @ports << 'Micro-USB'
         @licenses = []
     end
 

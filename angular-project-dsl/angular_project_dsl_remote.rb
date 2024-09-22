@@ -5,6 +5,7 @@ class AngularProjectDSLRemote < AngularProjectDSL
 
   def initialize(app_name, workspace_name, touch_screen)
     super(app_name)
+    @project_name = to_lower_kebab_case(app_name)
     @workspace_name = workspace_name
     @type = "remote"
     @touch_screen = touch_screen

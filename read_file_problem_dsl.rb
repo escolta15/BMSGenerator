@@ -16,6 +16,7 @@ require_relative 'touch-screen-dsl/touch_screen_z41_lite_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z40_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z35_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z28_dsl.rb'
+require_relative 'touch-screen-dsl/touch_screen_zev_dsl.rb'
 
 module TouchScreenType
   Z100 = 'z100'
@@ -27,6 +28,7 @@ module TouchScreenType
   Z40 = 'z40'
   Z35 = 'z35'
   Z28 = 'z28'
+  ZEV = 'zev'
 end
 
 file_path = 'demo_example.json'
@@ -58,6 +60,8 @@ def read_touchscreens(workspace_name, touchscreens)
       current_touchscreen = TouchScreenZ35.new
     when TouchScreenType::Z28
       current_touchscreen = TouchScreenZ28.new
+    when TouchScreenType::ZEV
+      current_touchscreen = TouchScreenZEV.new
     else
       puts "That touchscreen (#{touchscreen['name']}) does not exist."
     end

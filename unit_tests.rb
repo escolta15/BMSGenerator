@@ -14,6 +14,7 @@ require_relative 'touch-screen-dsl/touch_screen_z41_lite_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z40_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z35_dsl.rb'
 require_relative 'touch-screen-dsl/touch_screen_z28_dsl.rb'
+require_relative 'touch-screen-dsl/touch_screen_zev_dsl.rb'
 
 class TestTouchScreens < Test::Unit::TestCase
   def test_valid_z100_color
