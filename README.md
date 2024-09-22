@@ -1,10 +1,10 @@
-# BMSGenerator
+# BMSGenerator v1.0.1
 
 This repository contains the generator for the master's thesis **'Optimization in the Automatic Generation of a Building Management System through a Line of Touchscreens'**.
 
 The generator helps manage **variability** and **scalability** through DSLs for Angular projects and touchscreens.
 
-When the generator is executed, a project is created that contains a *Host* application and *Remote* applications, which are the touchscreens. This architecture is called **Native Federation**.
+When the generator is executed, a project is created that contains a _Host_ application and _Remote_ applications, which are the touchscreens. This architecture is called **Native Federation**.
 
 ## Table of Contents
 
@@ -18,6 +18,7 @@ When the generator is executed, a project is created that contains a *Host* appl
 ## Installation
 
 Instructions for installing the project on your local machine.
+
 ```bash
 git clone https://github.com/escolta15/BMSGenerator.git
 ```
@@ -48,6 +49,7 @@ There is a file called 'demo_example.json' where you can configure the structure
     - type: it can be boolean, number or string.
 
 The file to launch is 'read_file_problem_dsl.rb' by running the command:
+
 ```bash
 ruby read_file_problem_dsl.rb
 ```
