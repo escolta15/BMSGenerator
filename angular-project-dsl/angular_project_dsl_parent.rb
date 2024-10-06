@@ -13,7 +13,7 @@ class AngularProjectDSLParent < AngularProjectDSL
       install_packages()
       
       files = Dir.glob(File.join("../templates/#{@type}/", '*'))
-      read_templates(files, '', binding)
+      read_templates(files, '', binding, false)
 
       add_script_in_package_json
     end

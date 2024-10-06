@@ -92,18 +92,22 @@ class AngularProjectDSL
     end
   end
 
-  def read_templates(files, path, data_binding)
+  def read_templates(files, path, data_binding, overwrite = true)
     for file in files
       filename = find_file(file)
       file_path = "#{path}#{filename}"
 
-      erb_template = File.read("#{file}")
+      if !File.exist?(file_path) || overwrite
+        erb_template = File.read("#{file}")
 
-      erb = ERB.new(erb_template)
+        erb = ERB.new(erb_template)
 
-      result = erb.result(data_binding)
+        result = erb.result(data_binding)
 
-      File.open(file_path, "w") { |file| file.write(result) }
+        File.open(file_path, "w") { |file| file.write(result) }
+      else
+        puts("The file #{filename} already exits.")
+      end
     end
   end
 
