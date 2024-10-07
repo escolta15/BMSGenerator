@@ -8,7 +8,7 @@
       "licenses": ["Smartphone Control"],
       "boxes": [
         {
-          "name": "Main ligth",
+          "name": "Main light",
           "type": "boolean"
         },
         {
