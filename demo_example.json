@@ -13,9 +13,19 @@
           "icon": 3
         },
         {
+          "name": "Favorites",
+          "type": "number",
+          "icon": 10
+        },
+        {
           "name": "Main Light",
           "type": "boolean",
-          "icon": 1
+          "icon": 9
+        },
+        {
+          "name": "Air Conditioner",
+          "type": "boolean",
+          "icon": 11
         },
         {
           "name": "Left Blind",
@@ -26,6 +36,74 @@
           "name": "Right Blind",
           "type": "number",
           "icon": 2
+        },
+        {
+          "name": "Door",
+          "type": "boolean",
+          "icon": 4
+        },
+        {
+          "name": "Temperature",
+          "type": "number",
+          "icon": 5
+        },
+        {
+          "name": "Humidity",
+          "type": "number",
+          "icon": 6
+        },
+        {
+          "name": "Television",
+          "type": "boolean",
+          "icon": 7
+        },
+        {
+          "name": "Alarm",
+          "type": "boolean",
+          "icon": 8
+        },
+        {
+          "name": "Lamp",
+          "type": "boolean",
+          "icon": 9
+        }
+      ]
+    },
+    {
+      "type": "z70",
+      "name": "Kitchen",
+      "color": "anthracite black",
+      "licenses": ["ZenVoice"],
+      "boxes": [
+        {
+          "name": "Menu",
+          "type": "string",
+          "icon": 15
+        },
+        {
+          "name": "Recipes",
+          "type": "string",
+          "icon": 12
+        },
+        {
+          "name": "Main Light",
+          "type": "boolean",
+          "icon": 9
+        },
+        {
+          "name": "Oven",
+          "type": "boolean",
+          "icon": 13
+        },
+        {
+          "name": "Blinds",
+          "type": "number",
+          "icon": 2
+        },
+        {
+          "name": "Kitchen",
+          "type": "boolean",
+          "icon": 16
         },
         {
           "name": "Door",
@@ -43,22 +121,19 @@
           "icon": 6
         },
         {
-          "name": "Television",
+          "name": "Blender",
           "type": "boolean",
-          "icon": 7
-        }
-      ]
-    },
-    {
-      "type": "z70",
-      "name": "Kitchen",
-      "color": "anthracite black",
-      "licenses": ["ZenVoice"],
-      "boxes": [
+          "icon": 14
+        },
         {
-          "name": "Blinds",
+          "name": "Timer",
           "type": "boolean",
-          "icon": 2
+          "icon": 8
+        },
+        {
+          "name": "Table lights",
+          "type": "boolean",
+          "icon": 9
         }
       ]
     },
@@ -68,9 +143,34 @@
       "color": "matte white",
       "boxes": [
         {
-          "name": "Lights",
+          "name": "Email",
+          "type": "string",
+          "icon": 17
+        },
+        {
+          "name": "Favorites",
+          "type": "number",
+          "icon": 10
+        },
+        {
+          "name": "Main Light",
           "type": "boolean",
-          "icon": 1
+          "icon": 9
+        },
+        {
+          "name": "Temperature",
+          "type": "number",
+          "icon": 5
+        },
+        {
+          "name": "Humidity",
+          "type": "number",
+          "icon": 6
+        },
+        {
+          "name": "Air Conditioner",
+          "type": "boolean",
+          "icon": 11
         }
       ]
     },
@@ -92,29 +192,9 @@
       "color": "silver",
       "boxes": [
         {
-          "name": "Welcome Message",
-          "type": "string",
-          "icon": 3
-        },
-        {
           "name": "Main Light",
           "type": "boolean",
           "icon": 1
-        },
-        {
-          "name": "Left Blind",
-          "type": "number",
-          "icon": 2
-        },
-        {
-          "name": "Right Blind",
-          "type": "number",
-          "icon": 2
-        },
-        {
-          "name": "Door",
-          "type": "number",
-          "icon": 4
         },
         {
           "name": "Temperature",
@@ -127,9 +207,14 @@
           "icon": 6
         },
         {
-          "name": "Television",
+          "name": "Heat",
           "type": "boolean",
-          "icon": 7
+          "icon": 11
+        },
+        {
+          "name": "Music",
+          "type": "boolean",
+          "icon": 18
         }
       ]
     },
