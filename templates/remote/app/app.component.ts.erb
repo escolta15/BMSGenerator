@@ -33,7 +33,7 @@ export class AppComponent {
   public totalPage: number = <%= @touch_screen.pages %>;
   public pages: { [id: number]: any } = {};
   public boxes: Box[] = [<% @touch_screen.get_boxes.each_with_index do |box, index| %>
-    { id: <%= index + 1 %>, name: "<%= box[:name] %>", type: "<%= box[:type] %>" },
+    { id: <%= index + 1 %>, name: "<%= box[:name] %>", type: "<%= box[:type] %>", icon: <%= box[:icon] %> },
   <% end %>];
   public sensors: any[] = <%= @touch_screen.sensors %>;
   public thermostats: number = <%= @touch_screen.thermostats %>;
@@ -88,6 +88,14 @@ export class AppComponent {
     this.programmingLed = true;
     setTimeout(() => (this.programmingLed = false), 3000);
     this.router.navigate(['']);
+  }
+
+  public onChangePage(): void {
+    if (this.router.config[0] && this.router.config[0].path == '') {
+      this.router.navigate(['']);
+    } else {
+      this.router.navigate(['<%= @project_name %>/touchscreen/']);
+    }
   }
 
   <% if defined?(@touch_screen.iluminated_button) %>

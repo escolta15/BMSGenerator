@@ -8,16 +8,44 @@
       "licenses": ["Smartphone Control"],
       "boxes": [
         {
-          "name": "Main light",
-          "type": "boolean"
+          "name": "Welcome Message",
+          "type": "string",
+          "icon": 3
         },
         {
-          "name": "Counter",
-          "type": "number"
+          "name": "Main Light",
+          "type": "boolean",
+          "icon": 1
         },
         {
-          "name": "Welcome",
-          "type": "string"
+          "name": "Left Blind",
+          "type": "number",
+          "icon": 2
+        },
+        {
+          "name": "Right Blind",
+          "type": "number",
+          "icon": 2
+        },
+        {
+          "name": "Door",
+          "type": "number",
+          "icon": 4
+        },
+        {
+          "name": "Temperature",
+          "type": "number",
+          "icon": 5
+        },
+        {
+          "name": "Humidity",
+          "type": "number",
+          "icon": 6
+        },
+        {
+          "name": "Television",
+          "type": "boolean",
+          "icon": 7
         }
       ]
     },
@@ -29,7 +57,8 @@
       "boxes": [
         {
           "name": "Blinds",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 2
         }
       ]
     },
@@ -40,7 +69,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -51,7 +81,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -62,7 +93,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -73,7 +105,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -84,7 +117,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -95,7 +129,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     },
@@ -106,7 +141,8 @@
       "boxes": [
         {
           "name": "Lights",
-          "type": "boolean"
+          "type": "boolean",
+          "icon": 1
         }
       ]
     }

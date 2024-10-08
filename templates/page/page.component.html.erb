@@ -1,5 +1,8 @@
 <div class="page-grid">
   <button class="box" *ngFor="let box of page" (click)="onClick(box)">
     {{ box.name }}
+    <mat-icon class="icon-size" title="{{ ICONS[box.icon] }}">{{
+      ICONS[box.icon]
+    }}</mat-icon>
   </button>
 </div>

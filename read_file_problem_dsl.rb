@@ -75,7 +75,7 @@ def read_touchscreens(workspace_name, touchscreens)
       end
       if touchscreen['boxes'] && !touchscreen['boxes'].empty?
         touchscreen['boxes'].each do |box|
-          current_touchscreen.add_box(box['name'], box['type'])
+          current_touchscreen.add_box(box['name'], box['type'], box['icon'])
         end
       end
 

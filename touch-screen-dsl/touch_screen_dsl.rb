@@ -9,8 +9,8 @@ class TouchScreen
     @boxes = []
   end
 
-  def add_box(name, type)
-    @boxes << { name: name, type: type }
+  def add_box(name, type, icon)
+    @boxes << { name: name, type: type, icon: icon }
   end
 
   def get_boxes

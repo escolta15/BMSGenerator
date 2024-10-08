@@ -1,17 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { BoxIcons } from '../../models/icons.enum';
 
 @Component({
   selector: 'app-page',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatIconModule],
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
 })
 export class PageComponent implements OnInit {
   @Input()
   page: any;
+
+  readonly ICONS = BoxIcons;
 
   constructor(private router: Router) {}
 

@@ -1,5 +1,5 @@
 <div class="touch_panel" [ngClass]="{ lcd: lcd, magnet: magnet }">
-  <mat-tab-group>
+  <mat-tab-group (selectedIndexChange)="onChangePage()">
     <mat-tab *ngFor="let page of getPages(); let i = index">
       <ng-template mat-tab-label> Page {{ i + 1 }} </ng-template>
       <app-page [page]="page"></app-page>
@@ -72,14 +72,12 @@
             >
           </ng-container>
         </ng-container>
+        <mat-icon *ngIf="battery" title="Battery">battery_full</mat-icon>
+        <mat-icon *ngIf="externalPowerSupply" title="External Power Supply"
+          >power</mat-icon
+        >
       </div>
     </div>
-  </div>
-  <div class="power">
-    <mat-icon *ngIf="battery" title="Battery">battery_full</mat-icon>
-    <mat-icon *ngIf="externalPowerSupply" title="External Power Supply"
-      >power</mat-icon
-    >
   </div>
 </div>
 
