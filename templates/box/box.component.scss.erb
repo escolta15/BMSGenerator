@@ -1,7 +1,11 @@
 h1 {
   display: flex;
   justify-content: center;
+  <% if @touch_screen.width == "320px" %>
+  font-size: 12px;
+  <% else %>
   font-size: 24px;
+  <% end %>
 }
 
 h2 {
@@ -17,8 +21,13 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
+    <% if @touch_screen.width == "320px" %>
+    width: 25px;
+    height: 25px;
+    <% else %>
     width: 50px;
     height: 50px;
+    <% end %>
     border-radius: 50%;
     padding: 10px;
 

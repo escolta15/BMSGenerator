@@ -1,9 +1,13 @@
 .page-grid {
   margin-top: 10px;
   display: grid;
+  <% if @touch_screen.width == "320px" %>
+  grid-auto-flow: column;
+  <% else %>
   grid-template-columns: repeat(3, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  gap: 10px;
+  <% end %>
+  grid-gap: 10px;
 }
 
 .box {
@@ -20,4 +24,8 @@
     height: auto;
     width: auto;
   }
+}
+
+.box--s {
+  width: fit-content;
 }

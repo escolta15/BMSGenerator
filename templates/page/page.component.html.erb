@@ -1,8 +1,14 @@
 <div class="page-grid">
+  <% if @touch_screen.width == "320px" %>
+  <button class="box--s" *ngFor="let box of page" (click)="onClick(box)" [title]="box.name">
+    <mat-icon title="{{ ICONS[box.icon] }}">{{ ICONS[box.icon] }}</mat-icon>
+  </button>
+  <% else %>
   <button class="box" *ngFor="let box of page" (click)="onClick(box)">
     {{ box.name }}
     <mat-icon class="icon-size" title="{{ ICONS[box.icon] }}">{{
       ICONS[box.icon]
     }}</mat-icon>
   </button>
+  <% end %>
 </div>
